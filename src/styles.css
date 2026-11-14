@@ -1,0 +1,236 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * SISTEMA DE DISEÑO — SpaceGaming
+ *
+ * Idea: la tienda como un mapa del cielo. Fondo azul noche (no negro puro),
+ * y el blanco "luz de estrella" del logo como color de acción.
+ *
+ *   Vacío      #0A0E1F  fondo de la página
+ *   Órbita     #11172E  superficies (tarjetas, paneles)
+ *   Polvo      #182042  superficies secundarias (campos, chips)
+ *   Estrella   #EEF0FA  texto principal y botones de acción
+ *   Nebulosa   #9AA2C7  texto secundario
+ *   Anillo     #A99BFF  violeta: enlaces, foco, elementos activos
+ *   Supernova  #FF7A66  solo para descuentos y ahorro
+ *
+ * Tipografía: Tektur (titulares y precios, eco de las letras cuadradas del logo)
+ *             Instrument Sans (todo lo demás).
+ *
+ * Los nombres de la izquierda (--primary, --card...) los usan los componentes de src/components/ui.
+ */
+
+@theme inline {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-display: "Tektur", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-promo: var(--promo);
+  --color-orbit: var(--orbit);
+  --color-whatsapp: var(--whatsapp);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #0a0e1f;
+  --foreground: #eef0fa;
+  --card: #11172e;
+  --card-foreground: #eef0fa;
+  --popover: #11172e;
+  --popover-foreground: #eef0fa;
+  --primary: #eef0fa;
+  --primary-foreground: #0a0e1f;
+  --secondary: #182042;
+  --secondary-foreground: #eef0fa;
+  --muted: #182042;
+  --muted-foreground: #9aa2c7;
+  --accent: #182042;
+  --accent-foreground: #eef0fa;
+  --orbit: #a99bff;
+  --destructive: #ff7a66;
+  --destructive-foreground: #0a0e1f;
+  --border: rgb(170 180 255 / 0.13);
+  --input: rgb(170 180 255 / 0.2);
+  --ring: #a99bff;
+  --ink: #11172e;
+  --ink-foreground: #eef0fa;
+  --promo: #ff7a66;
+  --whatsapp: #25d366;
+  --chart-1: #a99bff;
+  --chart-2: #ff7a66;
+  --chart-3: #7fd6ff;
+  --chart-4: #ffd27a;
+  --chart-5: #eef0fa;
+  --sidebar: #11172e;
+  --sidebar-foreground: #eef0fa;
+  --sidebar-primary: #eef0fa;
+  --sidebar-primary-foreground: #0a0e1f;
+  --sidebar-accent: #182042;
+  --sidebar-accent-foreground: #eef0fa;
+  --sidebar-border: rgb(170 180 255 / 0.13);
+  --sidebar-ring: #a99bff;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    /* Al saltar a una sección (ej. /ayuda#envios) el título no queda tapado por el encabezado fijo */
+    scroll-padding-top: 8.5rem;
+  }
+
+  /* Quita la espera de 300 ms del doble toque en celulares */
+  a,
+  button,
+  input,
+  select,
+  label {
+    touch-action: manipulation;
+  }
+
+  /* Los menús nativos también en azul noche (en Windows salían blancos) */
+  select {
+    background-color: var(--secondary);
+    color: var(--foreground);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--color-foreground);
+    /* Cielo estático: puntos de luz dibujados con CSS, sin animación ni imágenes */
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(1px 1px at 23px 41px, rgb(238 240 250 / 0.45), transparent),
+      radial-gradient(1px 1px at 151px 97px, rgb(238 240 250 / 0.3), transparent),
+      radial-gradient(1.5px 1.5px at 271px 13px, rgb(238 240 250 / 0.5), transparent),
+      radial-gradient(1px 1px at 197px 233px, rgb(169 155 255 / 0.5), transparent),
+      radial-gradient(1px 1px at 61px 181px, rgb(238 240 250 / 0.25), transparent),
+      radial-gradient(1px 1px at 311px 289px, rgb(238 240 250 / 0.35), transparent);
+    background-size: 340px 320px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  /* Foco visible y consistente para quien navega con teclado */
+  :focus-visible {
+    outline: 2px solid var(--orbit);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--orbit);
+    color: var(--background);
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* El único momento animado de la página: el anillo del planeta se traza al cargar. */
+@keyframes ring-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.ring-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: ring-draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+}
+
+/* Transición entre páginas: corta y discreta */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.18s;
+}
+::view-transition-group(*) {
+  animation-duration: 0.28s;
+  animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

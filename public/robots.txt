@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /buscar
+Disallow: /admin
+
+# CAMBIAR si tu dominio es otro
+Sitemap: https://spacegaming.co/sitemap.xml
